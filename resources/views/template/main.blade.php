@@ -30,6 +30,7 @@
     <main class="flex justify-center">
         {{ $slot }}
     </main>
+    <x-footer></x-footer>
 </body>
 
 </html>

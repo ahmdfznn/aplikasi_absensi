@@ -22,7 +22,7 @@
 
                         </div>
                         <div class="flex justify-end items-center w-3/4">
-                            <x-text-input type="search" class="h-10" placeholder="Search..." />
+                            <x-text-input type="search" class="h-10" placeholder="Search..." id="search" />
                         </div>
                     </div>
                     <table class="w-full">
@@ -43,10 +43,10 @@
                         </thead>
                         <tbody>
                             @foreach ($karyawan as $data)
-                                <tr class="border-b border-slate-400 text-center odd:bg-slate-200">
+                                <tr class="border-b border-slate-400 text-center odd:bg-slate-200 item">
                                     <td class="p-2">{{ $loop->iteration }}.</td>
                                     <td class="p-2">{{ $data->nip }}</td>
-                                    <td class="p-2">{{ Str::limit($data->nama, '10', '...') }}</td>
+                                    <td class="p-2 nama">{{ Str::limit($data->nama, '10', '...') }}</td>
                                     <td class="p-2">{{ $data->nik }}</td>
                                     <td class="p-2">{{ Str::limit($data->jabatan, '10', '...') }}</td>
                                     <td class="p-2">{{ $data->jenis_kelamin }}</td>
@@ -82,4 +82,16 @@
                 </div>
             @endif
         </x-pages>
+
+
+        <script>
+            $(document).ready(function() {
+                $("#search").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("table .item").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    })
+                })
+            })
+        </script>
 </x-main>
