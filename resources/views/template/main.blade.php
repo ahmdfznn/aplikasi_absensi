@@ -18,7 +18,7 @@
         }
 
         .shadow-input {
-            box-shadow: 0 0 5px blue;
+            box-shadow: 0 0 10px blue;
         }
     </style>
 </head>

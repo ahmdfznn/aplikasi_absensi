@@ -13,10 +13,17 @@
             @endif
             @if ($karyawan->count())
                 <div class="flex flex-col w-full">
-                    <div>
-                        <a href="{{ url('karyawan/create') }}">
-                            <x-primary-button class="bg-gray-800">{{ __('+ Tambah Karyawan') }}</x-primary-button>
-                        </a>
+                    <div class="flex justify-between">
+                        <div>
+                            <a href="{{ url('karyawan/create') }}">
+                                <x-primary-button class="bg-gray-800">{{ __('+ Tambah Karyawan') }}</x-primary-button>
+                            </a>
+                            <h1 class="font-medium text-xl">{{ $karyawan->count() }} Karyawan</h1>
+
+                        </div>
+                        <div class="flex justify-end items-center w-3/4">
+                            <x-text-input type="search" class="h-10" placeholder="Search..." />
+                        </div>
                     </div>
                     <table class="w-full">
                         <thead>
@@ -39,19 +46,27 @@
                                 <tr class="border-b border-slate-400 text-center odd:bg-slate-200">
                                     <td class="p-2">{{ $loop->iteration }}.</td>
                                     <td class="p-2">{{ $data->nip }}</td>
-                                    <td class="p-2">{{ $data->nama }}</td>
+                                    <td class="p-2">{{ Str::limit($data->nama, '10', '...') }}</td>
                                     <td class="p-2">{{ $data->nik }}</td>
-                                    <td class="p-2">{{ $data->jabatan }}</td>
+                                    <td class="p-2">{{ Str::limit($data->jabatan, '10', '...') }}</td>
                                     <td class="p-2">{{ $data->jenis_kelamin }}</td>
-                                    <td class="p-2">{{ $data->tempat_lahir }}</td>
+                                    <td class="p-2">{{ Str::limit($data->tempat_lahir, '10', '...') }}</td>
                                     <td class="p-2">{{ $data->tanggal_lahir }}</td>
                                     <td class="p-2">{{ $data->no_telepon }}</td>
-                                    <td class="p-2">{{ $data->alamat }}</td>
-                                    <td class="p-2">
+                                    <td class="p-2">{{ Str::limit($data->alamat, '10', '...') }}</td>
+                                    <td class="flex items-center p-2">
                                         <a href="{{ url('karyawan/' . $data->nama . '/edit') }}">
                                             <x-primary-button class="bg-gray-800">{{ __('Edit') }}
                                             </x-primary-button>
                                         </a>
+                                        <form action="{{ url('karyawan/' . $data->id) }}" method="post">
+                                            @method('delete')
+                                            @csrf
+                                            <x-submit-button class="bg-red-600"
+                                                onclick="return confirm('Apakah yakin anda ingin menghapus?')">
+                                                {{ __('Hapus') }}
+                                            </x-submit-button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

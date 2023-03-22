@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Absensi;
 use App\Models\Karyawan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AbsensiController extends Controller
@@ -40,7 +41,7 @@ class AbsensiController extends Controller
     {
         Absensi::create([
             'nama' => $request->nama,
-            'kehadiran' => $request->kehadiran
+            'kehadiran' => $request->absensi
         ]);
 
         return redirect('absensi');

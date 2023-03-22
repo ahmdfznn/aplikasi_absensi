@@ -14,7 +14,7 @@
         }
 
         .shadow-input {
-            box-shadow: 0 0 5px indigo;
+            box-shadow: 0 0 10px indigo;
         }
     </style>
 </head>

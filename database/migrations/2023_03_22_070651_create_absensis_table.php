@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->enum('kehadiran', ['Hadir', 'Izin', 'Sakit', 'Tanpa Keterangan']);
-            $table->date('tanggal');
+            $table->date('tanggal')->default(now());
             $table->timestamps();
         });
     }

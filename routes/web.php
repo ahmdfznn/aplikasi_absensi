@@ -27,7 +27,8 @@ Route::middleware('guest')->group(function () {
     });
 });
 
-
+Route::middleware('karyawan')->group(function () {
+});
 
 Route::middleware('auth')->group(function () {
 
@@ -38,9 +39,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('karyawan', KaryawanController::class);
 
-    Route::controller(AbsensiController::class)->group(function () {
-        Route::get('absensi', 'index');
-    });
+    Route::resource('absensi', AbsensiController::class);
 
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });

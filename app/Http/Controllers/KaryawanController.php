@@ -149,10 +149,10 @@ class KaryawanController extends Controller
      * @param  \App\Models\Karyawan  $karyawan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Karyawan $karyawan, $id)
+    public function destroy($id)
     {
         Karyawan::destroy($id);
 
-        return redirect('pegawai')->with('delete-pegawai', 'Data berhasil dihapus!');
+        return redirect('karyawan')->with('delete-karyawan', 'Data berhasil dihapus!');
     }
 }
