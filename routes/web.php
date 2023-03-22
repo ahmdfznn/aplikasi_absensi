@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\KaryawanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +17,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::middleware('guest')->group(function () {
+    Route::controller(AuthController::class)->group(function () {
+        Route::get('login', 'login')->name('login');
+        Route::post('login', 'check');
+        Route::get('register', 'register')->name('register');
+        Route::post('register', 'add');
+    });
+});
+
+
+
+Route::middleware('auth')->group(function () {
+
+    Route::controller(PagesController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('laporan', 'laporan');
+    });
+
+    Route::resource('karyawan', KaryawanController::class);
+
+    Route::controller(AbsensiController::class)->group(function () {
+        Route::get('absensi', 'index');
+    });
+
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
